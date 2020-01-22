@@ -56,14 +56,7 @@ public class EmployeeService {
         Optional<EmployeeEntity> employee = repository.findById(entity.getId());
          
         if(employee.isPresent()){
-            EmployeeEntity newEntity = employee.get();
-            newEntity.setEmail(entity.getEmail());
-            newEntity.setFirstName(entity.getFirstName());
-            newEntity.setLastName(entity.getLastName());
- 
-            newEntity = repository.save(newEntity);
-             
-            return newEntity;
+            return repository.save(entity);
         } else {
         	throw new RecordNotFoundException("Record does not exist for the given Id");
         }
