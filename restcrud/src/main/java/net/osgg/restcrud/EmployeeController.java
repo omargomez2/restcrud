@@ -1,6 +1,7 @@
 package net.osgg.restcrud;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -59,7 +60,7 @@ public class EmployeeController {
     
  
     @DeleteMapping("/employees/{id}")
-    public HttpStatus deleteEmployeeById(@PathVariable("id") Long id) 
+    public HttpStatus deleteEmployeeById(@PathVariable("id") UUID id) 
                                                     throws RecordNotFoundException {
         service.deleteEmployeeById(id);
         return HttpStatus.OK;

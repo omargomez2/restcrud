@@ -3,7 +3,8 @@ package net.osgg.restcrud;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
- 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
@@ -62,7 +63,7 @@ public class EmployeeService {
         }
     } 
     
-    public void deleteEmployeeById(Long id) throws RecordNotFoundException{
+    public void deleteEmployeeById(UUID id) throws RecordNotFoundException{
         Optional<EmployeeEntity> employee = repository.findById(id);
          
         if(employee.isPresent()) {
