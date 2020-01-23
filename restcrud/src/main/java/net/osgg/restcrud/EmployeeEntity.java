@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 
+import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.UUID;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -35,7 +37,10 @@ public class EmployeeEntity {
     @Type(type = "uuid-char")
     private UUID fk;
     
-    @Lob
+    @CreationTimestamp
+    private LocalDateTime dateTimeStamp;
+
+	@Lob
     private byte[] file;
     
     
@@ -86,6 +91,16 @@ public class EmployeeEntity {
 	public UUID getFk() {
 		return fk;
 	}	
+	
+
+	public LocalDateTime getDateTimeStamp() {
+		return dateTimeStamp;
+	}
+
+	public void setDateTimeStamp(LocalDateTime dateTimeStamp) {
+		this.dateTimeStamp = dateTimeStamp;
+	}
+
 	
 	@Override
     public String toString() {
