@@ -3,10 +3,10 @@ package net.osgg.restcrud;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -29,7 +29,14 @@ public class EmployeeEntity {
     private String firstName;
     private String lastName;
     private String email;
-      
+    
+    @Type(type = "uuid-char")
+    private UUID fk;
+    
+    @Lob
+    private byte[] file;
+    
+    
     public UUID getId() {
 		return id;
 	}
@@ -61,7 +68,23 @@ public class EmployeeEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public byte[] getFile() {
+		return file;
+	}
 
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+
+	public void setFk(UUID fk) {
+		this.fk = fk;
+	}
+
+	public UUID getFk() {
+		return fk;
+	}	
+	
 	@Override
     public String toString() {
         return "EmployeeEntity [id=" + id + ", firstName=" + firstName + 
