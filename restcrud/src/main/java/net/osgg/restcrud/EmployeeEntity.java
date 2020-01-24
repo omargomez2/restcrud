@@ -1,15 +1,18 @@
 package net.osgg.restcrud;
 
-import javax.persistence.Entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 
-import java.time.LocalDateTime;
 import java.util.Base64;
+import java.util.Date;
 import java.util.UUID;
+
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,7 +41,7 @@ public class EmployeeEntity {
     private UUID fk;
     
     @CreationTimestamp
-    private LocalDateTime dateTimeStamp;
+    private Date dateTimeStamp;    
 
 	@Lob
     private byte[] file;
@@ -93,14 +96,13 @@ public class EmployeeEntity {
 	}	
 	
 
-	public LocalDateTime getDateTimeStamp() {
+	public Date getDateTimeStamp() {
 		return dateTimeStamp;
 	}
 
-	public void setDateTimeStamp(LocalDateTime dateTimeStamp) {
+	public void setDateTimeStamp(Date dateTimeStamp) {
 		this.dateTimeStamp = dateTimeStamp;
 	}
-
 	
 	@Override
     public String toString() {
