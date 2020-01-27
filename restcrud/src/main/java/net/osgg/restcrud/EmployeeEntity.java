@@ -1,25 +1,22 @@
 package net.osgg.restcrud;
 
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 
-import java.sql.Time;
-import java.sql.Date;
-import java.util.Base64;
-
 import java.util.UUID;
-
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import javax.persistence.Column;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Type;
 
+import org.hibernate.annotations.CreationTimestamp;
+import javax.persistence.Basic;
+import java.sql.Time;
+import java.sql.Date;
+
+import javax.persistence.Lob;
+import java.util.Base64;
 
  
 @Entity
@@ -31,11 +28,13 @@ public class EmployeeEntity {
 			name = "UUID",
 			strategy = "org.hibernate.id.UUIDGenerator"
 	)
-	@Column(name="id", updatable = false, nullable = false)
+	@Column(updatable = false, nullable = false)
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
 	private UUID id;
-    private String firstName;
+    
+	
+	private String firstName;
     private String lastName;
     private String email;
     
@@ -50,6 +49,7 @@ public class EmployeeEntity {
     @CreationTimestamp
     private Time time;  
 
+    
 	@Lob
     private byte[] file;
     
