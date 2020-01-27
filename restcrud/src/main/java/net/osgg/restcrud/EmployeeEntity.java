@@ -57,6 +57,7 @@ public class EmployeeEntity {
 		return date;
 	}
 
+	
 	public void setDate(Date date) {
 		this.date = date;
 	}
