@@ -1,5 +1,6 @@
 package net.osgg.restcrud;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,10 +16,15 @@ import net.osgg.restcrud.EmployeeEntity;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+	
 	List<EmployeeEntity> findByEmailContaining(String email);
+	
 	Optional <EmployeeEntity> findById(UUID id);
+	
 	@Transactional
 	@Modifying
 	@Query("DELETE from EmployeeEntity e WHERE e.id = ?1")
 	void deleteById(UUID id);
+	
+	List<EmployeeEntity> findAllByDate(Date date);
 }

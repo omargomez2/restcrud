@@ -1,5 +1,7 @@
 package net.osgg.restcrud;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +35,7 @@ public class EmployeeController {
     }
  
     @GetMapping("/employees/{id}")
-    public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable("id") Long id) 
+    public ResponseEntity<EmployeeEntity> getEmployeeById(@PathVariable("id") UUID id) 
                                                     throws RecordNotFoundException {
         EmployeeEntity entity = service.getEmployeeById(id);
         return new ResponseEntity<EmployeeEntity>(entity, new HttpHeaders(), HttpStatus.OK);
@@ -44,7 +46,13 @@ public class EmployeeController {
     	List<EmployeeEntity> list = service.getEmployeesByEmailContaining(email);
         return new ResponseEntity<List<EmployeeEntity>>(list, new HttpHeaders(), HttpStatus.OK);
     }    
- 
+
+    @GetMapping("/employees/findbydate/{date}")
+    public ResponseEntity<List<EmployeeEntity>> getEmployeeByDate(@PathVariable("date") String date) throws ParseException {
+    	List<EmployeeEntity> list = service.getEmployeesByDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+        return new ResponseEntity<List<EmployeeEntity>>(list, new HttpHeaders(), HttpStatus.OK);
+    }    
+    
     @PostMapping("/employees")
     public ResponseEntity<EmployeeEntity> createOrUpdateEmployee(@RequestBody EmployeeEntity employee){
         EmployeeEntity newed = service.createEmployee(employee);
@@ -53,7 +61,7 @@ public class EmployeeController {
     
     @PutMapping("/employees")
     public ResponseEntity<EmployeeEntity> updateEmployee(@RequestBody EmployeeEntity employee) 
-    															throws RecordNotFoundException{
+    															throws RecordNotFoundException, ParseException{
     	EmployeeEntity updated = service.updateEmployee(employee);
         return new ResponseEntity<EmployeeEntity>(updated, new HttpHeaders(), HttpStatus.OK);
     }    

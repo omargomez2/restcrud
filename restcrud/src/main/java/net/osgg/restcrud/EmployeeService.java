@@ -1,6 +1,7 @@
 package net.osgg.restcrud;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,7 +27,17 @@ public class EmployeeService {
             return new ArrayList<EmployeeEntity>();
         }
     }
-
+    
+    public EmployeeEntity getEmployeeById(UUID id) throws RecordNotFoundException{
+        Optional<EmployeeEntity> employee = repository.findById(id);
+         
+        if(employee.isPresent()) {
+            return employee.get();
+        } else {
+        	throw new RecordNotFoundException("Record does not exist for the given Id");
+        }
+    }
+    
     public List<EmployeeEntity> getEmployeesByEmailContaining(String email){
         List<EmployeeEntity> employeeList = repository.findByEmailContaining(email);
          
@@ -37,16 +48,16 @@ public class EmployeeService {
         }
     }
     
-    public EmployeeEntity getEmployeeById(Long id) throws RecordNotFoundException{
-        Optional<EmployeeEntity> employee = repository.findById(id);
+    public List<EmployeeEntity> getEmployeesByDate(Date date){
+        List<EmployeeEntity> employeeList = repository.findAllByDate(date);
          
-        if(employee.isPresent()) {
-            return employee.get();
+        if(employeeList.size() > 0) {
+            return employeeList;
         } else {
-        	throw new RecordNotFoundException("Record does not exist for the given Id");
+            return new ArrayList<EmployeeEntity>();
         }
     }
-     
+    
     public EmployeeEntity createEmployee(EmployeeEntity entity){
           entity = repository.save(entity);
           return entity;

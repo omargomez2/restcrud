@@ -4,15 +4,16 @@ package net.osgg.restcrud;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 
+import java.sql.Time;
+import java.sql.Date;
 import java.util.Base64;
-import java.util.Date;
+
 import java.util.UUID;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,6 +24,7 @@ import org.hibernate.annotations.Type;
  
 @Entity
 public class EmployeeEntity {
+	
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(
@@ -40,13 +42,33 @@ public class EmployeeEntity {
     @Type(type = "uuid-char")
     private UUID fk;
     
+    @Basic
     @CreationTimestamp
-    private Date dateTimeStamp;    
+    private Date date;
+    
+    @Basic
+    @CreationTimestamp
+    private Time time;  
 
 	@Lob
     private byte[] file;
     
-    
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}	
+	
     public UUID getId() {
 		return id;
 	}
@@ -96,17 +118,9 @@ public class EmployeeEntity {
 	}	
 	
 
-	public Date getDateTimeStamp() {
-		return dateTimeStamp;
-	}
-
-	public void setDateTimeStamp(Date dateTimeStamp) {
-		this.dateTimeStamp = dateTimeStamp;
-	}
-	
 	@Override
     public String toString() {
         return "EmployeeEntity [id=" + id + ", firstName=" + firstName + 
-                ", lastName=" + lastName + ", email=" + email   + "]";
+                ", lastName=" + lastName + ", email=" + email + "]";
     }
 }
