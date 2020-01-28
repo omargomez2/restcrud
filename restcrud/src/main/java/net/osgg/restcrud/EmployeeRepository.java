@@ -1,18 +1,21 @@
 package net.osgg.restcrud;
 
-import java.util.Date;
+import net.osgg.restcrud.EmployeeEntity;
+
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
 import java.util.Optional;
 import java.util.UUID;
 
-import javax.transaction.Transactional;
+import java.util.Date;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
- 
-import net.osgg.restcrud.EmployeeEntity;
+
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
