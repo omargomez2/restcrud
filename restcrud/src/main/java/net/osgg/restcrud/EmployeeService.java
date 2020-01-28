@@ -1,17 +1,18 @@
 package net.osgg.restcrud;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
- 
 import net.osgg.restcrud.EmployeeEntity;
 import net.osgg.restcrud.RecordNotFoundException;
 import net.osgg.restcrud.EmployeeRepository;
+
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class EmployeeService {
@@ -63,8 +64,7 @@ public class EmployeeService {
           return entity;
     } 
 
-    public EmployeeEntity updateEmployee(EmployeeEntity entity) throws RecordNotFoundException 
-    {
+    public EmployeeEntity updateEmployee(EmployeeEntity entity) throws RecordNotFoundException{
         Optional<EmployeeEntity> employee = repository.findById(entity.getId());
          
         if(employee.isPresent()){
@@ -83,4 +83,5 @@ public class EmployeeService {
             throw new RecordNotFoundException("Record does not exist for the given Id");
         }
     } 
+    
 }
